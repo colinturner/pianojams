@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Colin's Piano</title>
+  <link rel="stylesheet" href="colin-style.css">
+  <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+</head>
+<body>
+
+  <div class="title">
+    NOTES
+  </div>
+
+  <div class="keys">
+    
+
+
+    <div data-key="81" class="key">
+      <span class="sound">C1</span>
+      <kbd>Q</kbd>
+    </div>
+    
+    <div data-key="87" class="key black-key">
+      <span class="sound">Db</span>
+      <kbd>W</kbd>
+    </div>
+    
+    <div data-key="69" class="key">
+      <span class="sound">D</span>
+      <kbd>E</kbd>
+    </div>
+    
+    <div data-key="82" class="key black-key">
+      <span class="sound">Eb</span>
+      <kbd>R</kbd>
+    </div>
+    
+    <div data-key="84" class="key">
+      <span class="sound">E</span>
+      <kbd>T</kbd>
+    </div>
+    
+    <div data-key="89" class="key">
+      <span class="sound">F</span>
+      <kbd>Y</kbd>
+    </div>
+    
+    <div data-key="85" class="key black-key">
+      <span class="sound">Gb</span>
+      <kbd>U</kbd>
+    </div>
+    
+    <div data-key="73" class="key">
+      <span class="sound">G</span>
+      <kbd>I</kbd>
+    </div>
+    
+    <div data-key="79" class="key black-key">
+      <span class="sound">Ab</span>
+      <kbd>O</kbd>
+    </div>
+    
+    <div data-key="80" class="key">
+      <span class="sound">A</span>
+      <kbd>P</kbd>
+    </div>
+    
+    <div data-key="219" class="key black-key">
+      <span class="sound">Bb</span>
+      <kbd>[</kbd>
+    </div>
+    
+    <div data-key="221" class="key">
+      <span class="sound">B</span>
+      <kbd>]</kbd>
+    </div>
+    
+    <div data-key="220" class="key">
+      <span class="sound">C2</span>
+      <kbd>\</kbd>
+    </div>
+
+
+  </div>
+
+  <div class="title">
+    CHORDS
+  </div>
+
+  <div class="keys">
+    
+    <div data-key="90" class="key">
+      <span class="sound">C</span>
+      <kbd>Z</kbd>
+    </div>
+
+    <div data-key="88" class="key">
+      <span class="sound">Dm</span>
+      <kbd>X</kbd>
+    </div>
+
+    <div data-key="67" class="key">
+      <span class="sound">Em</span>
+      <kbd>C</kbd>
+    </div>
+
+    <div data-key="86" class="key">
+      <span class="sound">E</span>
+      <kbd>V</kbd>
+    </div>
+
+    <div data-key="66" class="key">
+      <span class="sound">F</span>
+      <kbd>B</kbd>
+    </div>
+
+    <div data-key="78" class="key">
+      <span class="sound">Fm</span>
+      <kbd>N</kbd>
+    </div>
+
+    <div data-key="77" class="key">
+      <span class="sound">G</span>
+      <kbd>M</kbd>
+    </div>
+
+    <div data-key="188" class="key">
+      <span class="sound">Am</span>
+      <kbd>,</kbd>
+    </div>
+
+    <div data-key="190" class="key">
+      <span class="sound">Bb</span>
+      <kbd>.</kbd>
+    </div>
+
+
+  </div>
+
+
+  <!-- notes -->
+  <audio data-key="81" src="sounds/C1.wav"></audio>
+  <audio data-key="87" src="sounds/Db1.wav"></audio>
+  <audio data-key="69" src="sounds/D1.wav"></audio>
+  <audio data-key="82" src="sounds/Eb1.wav"></audio>
+  <audio data-key="84" src="sounds/E1.wav"></audio>
+  <audio data-key="89" src="sounds/F1.wav"></audio>
+  <audio data-key="85" src="sounds/Gb1.wav"></audio>
+  <audio data-key="73" src="sounds/G1.wav"></audio>
+  <audio data-key="79" src="sounds/Ab1.wav"></audio>
+  <audio data-key="80" src="sounds/A1.wav"></audio>
+  <audio data-key="219" src="sounds/Bb1.wav"></audio>
+  <audio data-key="221" src="sounds/B1.wav"></audio>
+  <audio data-key="220" src="sounds/C2.wav"></audio>
+
+  <!-- chords -->
+  <audio data-key="90" src="sounds/C-chord.wav"></audio>
+  <audio data-key="88" src="sounds/Dm-chord.wav"></audio>
+  <audio data-key="67" src="sounds/E-chord.wav"></audio>
+  <audio data-key="86" src="sounds/Em-chord.wav"></audio>
+  <audio data-key="66" src="sounds/F-chord.wav"></audio>
+  <audio data-key="78" src="sounds/Fm-chord.wav"></audio>
+  <audio data-key="77" src="sounds/G-chord.wav"></audio>
+  <audio data-key="188" src="sounds/Am-chord.wav"></audio>
+  <audio data-key="190" src="sounds/Bb-chord.wav"></audio>
+
+
+<script>
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
